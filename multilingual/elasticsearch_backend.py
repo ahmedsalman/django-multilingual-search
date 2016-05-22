@@ -184,6 +184,8 @@ class ElasticsearchMultilingualSearchBackend(ElasticsearchSearchBackend):
         :param kwargs: start_offset, end_offset, result_class
         :return: result_class instance
         """
+        if not self.setup_complete:
+            self.setup()
         self.index_name = self._index_name_for_language(translation.get_language())
         # self.log.debug('search method called (%s): %s' %
         #                (translation.get_language(), query_string))
